@@ -15,6 +15,7 @@ public class AssetPool {
 
     public static Shader getShader(String resourceName) {
         File file = new File(resourceName);
+        
         if (AssetPool.shaders.containsKey(file.getAbsolutePath())) {
             return AssetPool.shaders.get(file.getAbsolutePath());
         } else {
@@ -27,6 +28,7 @@ public class AssetPool {
 
     public static Texture getTexture(String resourceName) {
         File file = new File(resourceName);
+        
         if (AssetPool.textures.containsKey(file.getAbsolutePath())) {
             return AssetPool.textures.get(file.getAbsolutePath());
         } else {
@@ -38,6 +40,7 @@ public class AssetPool {
 
     public static void addSpritesheet(String resourceName, Spritesheet spritesheet) {
         File file = new File(resourceName);
+        
         if (!AssetPool.spritesheets.containsKey(file.getAbsolutePath())) {
             AssetPool.spritesheets.put(file.getAbsolutePath(), spritesheet);
         }
@@ -45,9 +48,11 @@ public class AssetPool {
 
     public static Spritesheet getSpritesheet(String resourceName) {
         File file = new File(resourceName);
+        
         if (!AssetPool.spritesheets.containsKey(file.getAbsolutePath())) {
-            assert false : "Error: Tried to access spritesheet '" + resourceName + "' and it has not been added to asset pool.";
+            assert false : "Error: Tried to access Spritesheet: '" + resourceName + "', and it has not been added to AssetPool.";
         }
+        
         return AssetPool.spritesheets.getOrDefault(file.getAbsolutePath(), null);
     }
 }
