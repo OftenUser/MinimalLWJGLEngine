@@ -2,12 +2,13 @@ package renderer;
 
 import components.SpriteRenderer;
 import jade.Window;
-import org.joml.Vector2f;
-import org.joml.Vector4f;
 import util.AssetPool;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.joml.Vector2f;
+import org.joml.Vector4f;
 
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.glDisableVertexAttribArray;
@@ -90,6 +91,7 @@ public class RenderBatch {
     public void addSprite(SpriteRenderer spr) {
         // Get index and add renderObject
         int index = this.numSprites;
+        
         this.sprites[index] = spr;
         this.numSprites++;
 
@@ -116,10 +118,12 @@ public class RenderBatch {
         shader.use();
         shader.uploadMat4f("uProjection", Window.getScene().camera().getProjectionMatrix());
         shader.uploadMat4f("uView", Window.getScene().camera().getViewMatrix());
-        for (int i=0; i < textures.size(); i++) {
+        
+        for (int i = 0; i < textures.size(); i++) {
             glActiveTexture(GL_TEXTURE0 + i + 1);
             textures.get(i).bind();
         }
+        
         shader.uploadIntArray("uTextures", texSlots);
 
         glBindVertexArray(vaoID);
@@ -135,6 +139,7 @@ public class RenderBatch {
         for (int i=0; i < textures.size(); i++) {
             textures.get(i).unbind();
         }
+        
         shader.detach();
     }
 
@@ -147,11 +152,12 @@ public class RenderBatch {
         Vector4f color = sprite.getColor();
         Vector2f[] texCoords = sprite.getTexCoords();
 
-        int texId = 0;
+        int texID = 0;
+        
         if (sprite.getTexture() != null) {
             for (int i = 0; i < textures.size(); i++) {
                 if (textures.get(i) == sprite.getTexture()) {
-                    texId = i + 1;
+                    texID = i + 1;
                     break;
                 }
             }
@@ -160,7 +166,8 @@ public class RenderBatch {
         // Add vertices with the appropriate properties
         float xAdd = 1.0f;
         float yAdd = 1.0f;
-        for (int i=0; i < 4; i++) {
+        
+        for (int i = 0; i < 4; i++) {
             if (i == 1) {
                 yAdd = 0.0f;
             } else if (i == 2) {
@@ -183,8 +190,8 @@ public class RenderBatch {
             vertices[offset + 6] = texCoords[i].x;
             vertices[offset + 7] = texCoords[i].y;
 
-            // Load texture id
-            vertices[offset + 8] = texId;
+            // Load texture ID
+            vertices[offset + 8] = texID;
 
             offset += VERTEX_SIZE;
         }
@@ -193,7 +200,8 @@ public class RenderBatch {
     private int[] generateIndices() {
         // 6 indices per quad (3 per triangle)
         int[] elements = new int[6 * maxBatchSize];
-        for (int i=0; i < maxBatchSize; i++) {
+        
+        for (int i = 0; i < maxBatchSize; i++) {
             loadElementIndices(elements, i);
         }
 
