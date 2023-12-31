@@ -8,7 +8,7 @@ public class KeyListener {
     private boolean keyPressed[] = new boolean[350];
 
     private KeyListener() {
-
+        //
     }
 
     public static KeyListener get() {
