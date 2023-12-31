@@ -15,18 +15,21 @@ public class Renderer {
     }
 
     public void add(GameObject go) {
-        SpriteRenderer spr = go.getComponent(SpriteRenderer.class);
-        if (spr != null) {
-            add(spr);
+        SpriteRenderer sprite = go.getComponent(SpriteRenderer.class);
+        
+        if (sprite != null) {
+            add(sprite);
         }
     }
 
     private void add(SpriteRenderer sprite) {
         boolean added = false;
+        
         for (RenderBatch batch : batches) {
             if (batch.hasRoom()) {
-                Texture tex = sprite.getTexture();
-                if (tex == null || (batch.hasTexture(tex) || batch.hasTextureRoom())) {
+                Texture texture = sprite.getTexture();
+                
+                if (texture == null || (batch.hasTexture(texture) || batch.hasTextureRoom())) {
                     batch.addSprite(sprite);
                     added = true;
                     break;
