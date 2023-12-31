@@ -6,7 +6,6 @@ import org.joml.Vector4f;
 import renderer.Texture;
 
 public class SpriteRenderer extends Component {
-
     private Vector4f color;
     private Sprite sprite;
 
@@ -22,11 +21,12 @@ public class SpriteRenderer extends Component {
 
     @Override
     public void start() {
+        //
     }
 
     @Override
     public void update(float dt) {
-
+        //
     }
 
     public Vector4f getColor() {
