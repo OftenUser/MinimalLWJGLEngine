@@ -13,11 +13,11 @@ public abstract class Scene {
     protected List<GameObject> gameObjects = new ArrayList<>();
 
     public Scene() {
-
+        //
     }
 
     public void init() {
-
+        //
     }
 
     public void start() {
@@ -25,6 +25,7 @@ public abstract class Scene {
             go.start();
             this.renderer.add(go);
         }
+        
         isRunning = true;
     }
 
