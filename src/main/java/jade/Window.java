@@ -19,7 +19,7 @@ public class Window {
 
     private int targetWidth = 1920;
     private int targetHeight = 1080;
-    private float targetAspectRatio = (float)targetWidth / (float)targetHeight;
+    private float targetAspectRatio = (float) targetWidth / (float) targetHeight;
     private int width, height;
 
     private static Window window = null;
@@ -44,6 +44,7 @@ public class Window {
                 currentScene.init();
                 currentScene.start();
                 break;
+                
             default:
                 assert false : "Unknown scene '" + newScene + "'";
                 break;
@@ -92,6 +93,7 @@ public class Window {
 
         // Create the window
         glfwWindow = glfwCreateWindow(this.width, this.height, this.title, NULL, NULL);
+        
         if (glfwWindow == NULL) {
             throw new IllegalStateException("Failed to create the GLFW window.");
         }
@@ -120,9 +122,11 @@ public class Window {
         glfwSetWindowSizeCallback(glfwWindow, WindowResizeListener::resizeCallback);
 
         GLFWVidMode vidMode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+        
         this.targetWidth = vidMode.width();
         this.targetHeight = vidMode.height();
-        this.targetAspectRatio = (float)this.targetWidth / (float)this.targetHeight;
+        
+        this.targetAspectRatio = (float) this.targetWidth / (float) this.targetHeight;
 
         Window.changeScene(0);
     }
@@ -131,11 +135,13 @@ public class Window {
         float lastFrameTime = -1f;
 
         while (!glfwWindowShouldClose(glfwWindow)) {
-            float time = (float)glfwGetTime();
+            float time = (float) glfwGetTime();
             float dt = lastFrameTime - time;
+            
             if (lastFrameTime == -1) {
                 dt = 1f / 60f;
             }
+            
             lastFrameTime = time;
 
             // Poll events
