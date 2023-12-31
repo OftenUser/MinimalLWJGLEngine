@@ -12,7 +12,7 @@ import static org.lwjgl.glfw.GLFW.*;
 public class BaseScene extends Scene {
 
     public BaseScene() {
-
+        //
     }
 
     @Override
@@ -27,13 +27,13 @@ public class BaseScene extends Scene {
         background.addComponent(new SpriteRenderer(new Vector4f(0.53f, 0.91f, 0.91f, 1)));
         this.addGameObjectToScene(background);
 
-        GameObject obj1 = new GameObject("Object 1", new Transform(new Vector2f(100, 100), new Vector2f(256, 256)));
-        obj1.addComponent(new SpriteRenderer(sprites.getSprite(0)));
-        this.addGameObjectToScene(obj1);
+        GameObject object1 = new GameObject("Object 1", new Transform(new Vector2f(100, 100), new Vector2f(256, 256)));
+        object1.addComponent(new SpriteRenderer(sprites.getSprite(0)));
+        this.addGameObjectToScene(object1);
 
-        GameObject obj2 = new GameObject("Object 2", new Transform(new Vector2f(400, 100), new Vector2f(256, 256)));
-        obj2.addComponent(new SpriteRenderer(sprites.getSprite(7)));
-        this.addGameObjectToScene(obj2);
+        GameObject object2 = new GameObject("Object 2", new Transform(new Vector2f(400, 100), new Vector2f(256, 256)));
+        object2.addComponent(new SpriteRenderer(sprites.getSprite(7)));
+        this.addGameObjectToScene(object2);
     }
 
     private void loadResources() {
@@ -51,6 +51,7 @@ public class BaseScene extends Scene {
         } else if (KeyListener.isKeyPressed(GLFW_KEY_LEFT)) {
             camera.position.x -= 100f * dt;
         }
+        
         if (KeyListener.isKeyPressed(GLFW_KEY_UP)) {
             camera.position.y += 100f * dt;
         } else if (KeyListener.isKeyPressed(GLFW_KEY_DOWN)) {
